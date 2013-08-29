@@ -1,0 +1,27 @@
+Display watermark graphic=Watermark zeigen
+Invoice=Rechnung
+Type your comments here.=Type your comments here.
+Invoice Address=Rechnungsinformationen
+Delivery Address=Versandinformationen
+Date=Datum
+Payment Method=Zahlungsart
+Delivery PerLieferung per
+Quantity=Menge
+Item=Art.-Nr
+Description=Artikel
+Price=EUR
+Total=Zwischensumme
+Subtotal=Zwischensumme
+Discount=Rabatt
+VAT=MwSt
+Total=Gesamtsumme
+Printed=Gedruckt
+Select All=Alle Auswahlen
+Select Not Printed=Nicht Gedruckt Auswahlen
+Order/s=Bestellung/en
+Day/s=Tage/n
+Magento Orders=Magento Bestellung
+Include VAT=Mit MwSt
+refresh=refresh
+view invoice=rechnung zeigen
+print invoice=rechnung drucken
