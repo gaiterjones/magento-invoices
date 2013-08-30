@@ -25,3 +25,5 @@ Include VAT=Mit MwSt
 refresh=refresh
 view invoice=rechnung zeigen
 print invoice=rechnung drucken
+Order=Bestellung
+Number=nummer

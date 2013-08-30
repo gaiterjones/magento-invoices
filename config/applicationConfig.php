@@ -42,7 +42,7 @@ class config
 
 	// specify the full path to your configuration file here
 		
-	const userConfigurationFile='/PATH-TO-CONFIG/config/userConfig.ini';
+	const userConfigurationFile='/PATH-TO-USER-CONFIG-FILE/orders/config/userConfig.ini';
 	
 	//
 

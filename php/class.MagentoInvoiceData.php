@@ -31,7 +31,7 @@ class MagentoInvoiceData
 				  <strong>Options:</strong> &nbsp;  
 				  <label>
 					<input id="cbk_paid" type="checkbox" />
-				  '. $this->__t->__('Display watermark graphic'). '
+				  '. $this->__t->__('Display watermark graphic',$this->get('orderlanguage')). '
 				  </label>
 				 <!-- END Watermark Option -->' : ''). 
 				 '<!-- Print Button -->
@@ -57,7 +57,7 @@ class MagentoInvoiceData
 			  <div><img src="'. $_watermarkURL. '"></div>
 			</div>' : ''). 
 			
-			  '<h1 style="float: right;">'. $this->__t->__('Invoice'). '</h1>
+			  '<h1 style="float: right;">'. $this->__t->__('Invoice',$this->get('orderlanguage')). '</h1>
 			  
 			<div class="clearfix">'. 
 				(!empty($_logoURL) ? '
@@ -80,7 +80,7 @@ class MagentoInvoiceData
 	  
 	  $_html=($_showComments ? '
 	  <div id="notes"> <strong>Notes:</strong><br />
-		<textarea id="comments_area">['. $this->__t->__('Type your comments here.'). ']</textarea>
+		<textarea id="comments_area">['. $this->__t->__('Type your comments here.',$this->get('orderlanguage')). ']</textarea>
 	  </div>' : '').
 		(!empty($_footerText) ? '
 	  <div id="footer">
@@ -103,9 +103,18 @@ class MagentoInvoiceData
 		$_addVat=$this->get('addvat');
 		$_vatRate=(int)$this->get('vatrate');
 		$_count=0;
+		$_orderStoreID=null;
+		$_customerGroupID=null;
 
 		foreach ($this->__['order'] as $_order) {
 			$_count ++;
+			
+			$_orderStoreID=$_order->getStoreId();
+			$_customerGroupID = $_order->getCustomerGroupId();
+			
+			$_orderLanguage = $this->__['storeslanguage'][$_orderStoreID-1];
+				if (empty($_orderLanguage)) { $_orderLanguage=$this->get('languagecode'); }
+			$this->set('orderlanguage',$_orderLanguage);
 			
 			if ($_addVat && $_vatRate)
 			{
@@ -114,13 +123,13 @@ class MagentoInvoiceData
 			}
 			
 			if ($_order->hasInvoices()) {
-				$invoiceIdText="Invoice";
+				$_invoiceIdText=$this->__t->__('Invoice',$this->get('orderlanguage'));
 				foreach ($_order->getInvoiceCollection() as $_eachInvoice) {
-					$invoiceId = $_eachInvoice->getIncrementId();
+					$_invoiceId = $_eachInvoice->getIncrementId();
 				}
 			} else {
-					$invoiceIdText="Order";
-					$invoiceId = $_order->getIncrementId();
+					$_invoiceIdText=$this->__t->__('Order',$this->get('orderlanguage'));
+					$_invoiceId = $_order->getIncrementId();
 			}
 			
 			$_customerEmail=$_order->getCustomerEmail(); 
@@ -136,19 +145,21 @@ class MagentoInvoiceData
 		  $_html='
 		  <table width="100%" border="0" cellspacing="0" cellpadding="2">
 			<tr>
-			  <td valign="top"><p><strong>'. $this->__t->__('Invoice Address'). ':</strong></p>
+			  <td valign="top"><p><strong>'. $this->__t->__('Invoice Address',$this->get('orderlanguage')). ':</strong></p>
 				'. $_billingAddress. '
 				<p><a href="mailto:' . $_customerEmail . '"><u>' . $_customerEmail . '</u></a></p></td>
-			  <td valign="top"><p><strong>'. $this->__t->__('Delivery Address'). ':</strong></p>
+			  <td valign="top"><p><strong>'. $this->__t->__('Delivery Address',$this->get('orderlanguage')). ':</strong></p>
 				'. $_shippingAddress. '
 			  </td>
-			  <td valign="top"><p>'. $invoiceIdText . '  '. $this->__t->__('Number'). ': <strong>'. $invoiceId. '</strong></p>
+			  <td valign="top"><p>'. $_invoiceIdText . '  '. $this->__t->__('Number',$this->get('orderlanguage')). ': <strong>'. $_invoiceId. '</strong></p>
 				<p>
-				'. $this->__t->__('Date'). ':
+				'. $this->__t->__('Store ID',$this->get('orderlanguage')). ':
+				  <strong>'.$_orderStoreID. ' ('. $this->get('orderlanguage'). ')</strong><br />				
+				'. $this->__t->__('Date',$this->get('orderlanguage')). ':
 				  <strong>'. date("d.m.Y"). '</strong><br />
-				'. $this->__t->__('Payment Method'). ':
+				'. $this->__t->__('Payment Method',$this->get('orderlanguage')). ':
 				  <strong>'. $_paymentMethod. '</strong><br />
-				'. $this->__t->__('Delivery Per'). ':
+				'. $this->__t->__('Delivery Per',$this->get('orderlanguage')). ':
 				  <strong>'. $_shippingDescription. '</strong><br />
 				</p>	
 			</tr>
@@ -241,17 +252,17 @@ class MagentoInvoiceData
 		
 		$_html='<table border="0" width="99%" cellspacing="0" cellpadding="0">
 		<tr class="dataTableHeadingRow">
-		  <td class="dataTableHeadingContent">'. $this->__t->__('Quantity'). '</td>
-		  <td class="dataTableHeadingContent">'. $this->__t->__('Item'). '</td>
-		  <td class="dataTableHeadingContent" align="left">'. $this->__t->__('Description'). '</td>
-		  <td class="dataTableHeadingContent" align="right">'. $this->__t->__('Price'). '</td>
-		  <td class="dataTableHeadingContent" align="right">'. $this->__t->__('Total'). '</td>
+		  <td class="dataTableHeadingContent">'. $this->__t->__('Quantity',$this->get('orderlanguage')). '</td>
+		  <td class="dataTableHeadingContent">'. $this->__t->__('Item',$this->get('orderlanguage')). '</td>
+		  <td class="dataTableHeadingContent" align="left">'. $this->__t->__('Description',$this->get('orderlanguage')). '</td>
+		  <td class="dataTableHeadingContent" align="right">'. $this->__t->__('Price',$this->get('orderlanguage')). '</td>
+		  <td class="dataTableHeadingContent" align="right">'. $this->__t->__('Total',$this->get('orderlanguage')). '</td>
 		</tr>
 		'. $_rows . '
 		<tr>
 		  <td align="right" colspan="8"><table border="0" cellspacing="0" cellpadding="2" class="totals">
 			  <tr>
-				<td align="right" class="label">'. $this->__t->__('Subtotal'). '</td>
+				<td align="right" class="label">'. $this->__t->__('Subtotal',$this->get('orderlanguage')). '</td>
 				<td align="right"><strong>'. ($_addVat && $_vatRate ? $this->formatMoney ($_orderSubTotal + $_orderSubTotal * ($_vatRate/100)) : $_orderSubTotal). '</strong></td>
 			  </tr>'.
 			  ($_order->getShippingDescription() ? '
@@ -261,17 +272,17 @@ class MagentoInvoiceData
 			  </tr>' : ''). 
 			  ($_orderDiscountAmount != 0 ? '
 			  <tr>
-				<td align="right" class="label">'. $this->__t->__('Discount'). ''. $_orderDiscountDescription .'</td>
+				<td align="right" class="label">'. $this->__t->__('Discount',$this->get('orderlanguage')). ''. $_orderDiscountDescription .'</td>
 				<td align="right"><strong>'. $_orderDiscountAmount. '</strong></td>
 			  </tr>' : '').
 			  
 			  ($_orderTaxAmount > 0 ? '
 			  <tr>
-				<td align="right" class="label">'. $this->__t->__('VAT'). ' '. ($_addVat ? ' ('. $_vatRate. '%)' : ''). '</td>
+				<td align="right" class="label">'. $this->__t->__('VAT',$this->get('orderlanguage')). ' '. ($_addVat ? ' ('. $_vatRate. '%)' : ''). '</td>
 				<td align="right"><strong>'. $_orderTaxAmount. '</strong></td>
 			  </tr>' : '').
 			  '<tr class="total">
-				<td align="right" class="label"><strong>'. $this->__t->__('Total'). '</strong></td>
+				<td align="right" class="label"><strong>'. $this->__t->__('Total',$this->get('orderlanguage')). '</strong></td>
 				<td align="right"><strong>'. $_orderTotal. '</strong></td>
 			  </tr>
 			</table></td>

@@ -34,10 +34,10 @@ class Translator {
     	$this->set('languageCode',$_languageCode);
     }
     
-    public function __($str) {
+    public function __($str,$lang=false) {
 
-		$lang=$this->get('languageCode');		
-	
+		if (!$lang) { $lang=$this->get('languageCode'); }
+		
 		if ($lang==='en') { return $str; } // do not translate default language - english
 
     	try {

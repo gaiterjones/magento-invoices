@@ -76,9 +76,9 @@ class MagentoInvoice
 			$this->set('order',$_order);
 			
 			$_pageHeader=MagentoInvoiceData::pageHeader();
+			$_invoiceHeaderTable=MagentoInvoiceData::invoiceHeaderTable();
 			$_invoiceHeader=MagentoInvoiceData::invoiceHeader();
 			$_invoiceFooter=MagentoInvoiceData::invoiceFooter();
-			$_invoiceHeaderTable=MagentoInvoiceData::invoiceHeaderTable();
 			$_invoiceItemsTable=MagentoInvoiceData::invoiceItemsTable();
 			
 			$this->set('success',true);
@@ -102,18 +102,24 @@ class MagentoInvoice
 	{
 		$this->__config= new config();
 		
-		// load app translator			
+		// load app translator	
 		$_languageCode=$this->__config->get('languagecode');
 		if (empty($_languageCode)) { $_languageCode='en';}
 		$this->__t=new Translator($_languageCode);
 		
+		$this->set('languagecode',$_languageCode);
 		$this->set('watermarkurl',$this->__config->get('watermarkurl'));
 		$this->set('logourl',$this->__config->get('logourl'));
 		$this->set('headertext',$this->__config->get('headertext'));
 		$this->set('showcomments',$this->__config->get('showcomments'));;
 		$this->set('footertext',$this->__config->get('footertext'));		
 		$this->set('addvat',$this->__config->get('addvat'));
-		$this->set('vatrate',(int)$this->__config->get('vatrate'));		
+		$this->set('vatrate',(int)$this->__config->get('vatrate'));
+		$this->set('watermarkurl',$this->__config->get('watermarkurl'));
+		
+		// stores configured language array
+		$this->set('storeslanguage',explode(',',$this->__config->get('storeslanguage')));
+		
 	}
 
 
