@@ -23,10 +23,17 @@ class MagentoOrders
 
 	protected $__config;
 	protected $__;
+	public $__t;
 	
 	public function __construct($_variables) {
 		
 			$this->loadConfig();
+			
+			// load app translator			
+			$_languageCode=$this->__config->get('languagecode');
+			if (empty($_languageCode)) { $_languageCode='en';}
+			$this->__t=new Translator($_languageCode);	
+			
 			$this->loadClassVariables($_variables);			
 			
 			$this->getOrders();

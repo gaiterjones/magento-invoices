@@ -86,7 +86,7 @@ class MagentoInvoiceData
 	  <div id="footer">
 		<p>
 			<!-- Use for screen media footer text  -->
-			<strong>'. $_footerText. '</strong>
+			<strong>'. $this->__t->__($_footerText). '</strong>
 		</p>
 	  </div>' : '').
 	  '<div id="printFooter">

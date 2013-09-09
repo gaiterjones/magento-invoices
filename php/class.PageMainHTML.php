@@ -71,8 +71,8 @@ $(document).ready(function() {
 	
 	// -- click li to check/uncheck select check box
 	//
-	$("#orderlist").on("click", ".form_1_order_ul_li_span", function() {
-	  var checkbox = $(this).parent().find("input:checkbox[name=form_1_order_ul_select_order]");
+	$("#orderlist").on("click", ".ordercontainer", function() {
+	  var checkbox = $(this).parent().parent().find("input:checkbox[name=form_1_order_ul_select_order]");
 	  checkbox.attr("checked", !checkbox.attr("checked"));
 	  return false;
 	});	
@@ -166,21 +166,20 @@ $_HTML[] = array
 			<!-- START CONTENT -->
             <div id="content">
 				<div id="form">
-					<form>
 						<fieldset>
 							<legend>'. $this->__t->__('Magento Orders'). '</legend>
+								<div id="buttons">
+									<span class="clickable" id="form_1_refreshinvoice"><img class="infotip" alt="'. $this->__t->__('refresh'). '" title="'. $this->__t->__('refresh'). '" width="64" src="images/refresh-icon.png"></span>						
+									<span class="clickable" id="form_1_viewinvoice"><img class="infotip" alt="'. $this->__t->__('view invoice'). '" title="'. $this->__t->__('view invoice'). '" width="64" src="images/view-icon.png"></span>
+									<span class="clickable" id="form_1_printinvoice"><img class="infotip" alt="'. $this->__t->__('print invoice'). '" title="'. $this->__t->__('print invoice'). '" width="64" src="images/print-icon.png"></span>							
+									<span style="display:inline-block; vertical-align: top; margin-top:10px;" id="vatrate" class="infotip" title="'. $this->__t->__('Include VAT'). '">'. $this->__t->__('VAT'). ': % '. $this->__config->get('vatrate'). '</span>
+									<input type="checkbox" id="form_1_addvat" name="form_1_addvat" '. ($this->__config->get('addvat') ? 'checked' : ''). '>
+									
+								</div>									
 								<div id="orderlist">'.
 									$this->get('orderulhtml'). '
 								</div>							
 						</fieldset>
-					</form>
-						<div id="buttons">
-							<span class="clickable" id="form_1_refreshinvoice"><img class="infotip" title="'. $this->__t->__('refresh'). '" width="32" src="images/refresh-icon.png"></span>						
-							<span class="clickable" id="form_1_viewinvoice"><img class="infotip" title="'. $this->__t->__('view invoice'). '" width="32" src="images/view-icon.png"></span>
-							<span class="clickable" id="form_1_printinvoice"><img class="infotip" title="'. $this->__t->__('print invoice'). '" width="32" src="images/print-icon.png"></span>							
-							&nbsp;<input type="checkbox" id="form_1_addvat" name="form_1_addvat"'. ($this->__config->get('addvat') ? 'checked' : ''). '>
-							<span id="vatrate" class="infotip" title="'. $this->__t->__('Include VAT'). '">'. $this->__t->__('VAT'). ': % '. $this->__config->get('vatrate'). '</span>
-						</div>					
 				</div>
 			</div>
 			<!-- END CONTENT -->

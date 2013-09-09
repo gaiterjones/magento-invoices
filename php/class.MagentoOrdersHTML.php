@@ -22,7 +22,7 @@ class MagentoOrdersHTML
 
 	protected $__config;
 	protected $__;
-	protected $__t;
+	public $__t;
 	
 	public function __construct($_variables) {
 		

@@ -63,13 +63,7 @@ class MagentoInvoice
 			
 			$_invoicePrinted=$this->get('print');
 			
-			if ($_invoicePrinted) {
-				
-				// order ack by write ack file
-				if (is_writable($this->__config->get('cachefolder'))) {
-					file_put_contents($this->__config->get('cachefolder').md5($_orderID). 'MageInvoice', $_orderID); 
-				}
-			}
+			if ($_invoicePrinted) { $this->ackOrder($_orderID); }
 			
 			$_order=$_obj->get('output');
 
@@ -97,6 +91,19 @@ class MagentoInvoice
 		
 	}
 	
+	// -- order ack by creating ack file in cache folder
+	//
+	protected function ackOrder($_orderID)
+	{
+		
+		if (is_writable($this->__config->get('cachefolder'))) {
+			file_put_contents($this->__config->get('cachefolder').md5($_orderID). 'MageInvoice', $_orderID);
+			return true;
+		}
+		
+		return false;
+	}	
+	
 	// get app config
 	private function loadConfig()
 	{
@@ -121,7 +128,6 @@ class MagentoInvoice
 		$this->set('storeslanguage',explode(',',$this->__config->get('storeslanguage')));
 		
 	}
-
 
 	public function set($key,$value)
 	{
