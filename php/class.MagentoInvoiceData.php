@@ -122,12 +122,12 @@ class MagentoInvoiceData
 				$_order->setShippingAmount($_shippingInclTax);
 			}
 			
-			if ($_order->hasInvoices()) {
+			if ($_order->hasInvoices() && !$this->get('displayordernumber')) { // we can show the invoice number if one exists
 				$_invoiceIdText=$this->__t->__('Invoice',$this->get('orderlanguage'));
 				foreach ($_order->getInvoiceCollection() as $_eachInvoice) {
 					$_invoiceId = $_eachInvoice->getIncrementId();
 				}
-			} else {
+			} else { // get order number instead
 					$_invoiceIdText=$this->__t->__('Order',$this->get('orderlanguage'));
 					$_invoiceId = $_order->getIncrementId();
 			}

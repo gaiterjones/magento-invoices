@@ -12,23 +12,18 @@
  */
  
 /**
- * Magento Orders
+ * Magento Orders HTML extends Orders
  * -- Class to return html for displaying orders - used by ajax
  * @access public
  * @return Magento Order HTML
  */
-class MagentoOrdersHTML
+class MagentoOrdersHTML extends MagentoOrders
 {
 
-	protected $__config;
-	protected $__;
-	public $__t;
-	
 	public function __construct($_variables) {
-		
-			$this->loadConfig();
-			$this->loadClassVariables($_variables);
-	
+			
+			parent::__construct($_variables);
+
 			$this->getOrderHTML();
 	}
 
@@ -51,47 +46,5 @@ class MagentoOrdersHTML
 	
 	}
 	
-	
-	// -- get app config
-	private function loadConfig()
-	{
-		$this->__config= new config();
-		
-		// load app translator			
-		$_languageCode=$this->__config->get('languagecode');
-		if (empty($_languageCode)) { $_languageCode='en';}
-		$this->__t=new Translator($_languageCode);	
-		
-		$this->set('cachefolder',$this->__config->get('cachefolder'));
-	}
-
-	public function set($key,$value)
-	{
-		$this->__[$key] = $value;
-	}
-
-	public function get($variable)
-	{
-		return $this->__[$variable];
-	}
-	
-	
-	private function loadClassVariables($_variables)
-	{
-		foreach ($_variables as $_variableName=>$_variableData)
-		{
-			// check for optional data
-			if (substr($_variableName, -8) === 'optional') { continue; }
-			
-			$_variableData=trim($_variableData);
-			if (empty($_variableData) && $_variableData !='0') {
-				throw new exception('Class variable '.$_variableName. ' cannot be empty.');
-			}
-			
-			$this->set($_variableName,$_variableData);
-						
-		}
-	}	
-
 }  
 ?>

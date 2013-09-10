@@ -123,6 +123,7 @@ class MagentoInvoice
 		$this->set('addvat',$this->__config->get('addvat'));
 		$this->set('vatrate',(int)$this->__config->get('vatrate'));
 		$this->set('watermarkurl',$this->__config->get('watermarkurl'));
+		$this->set('displayordernumber',$this->__config->get('displayordernumber'));
 		
 		// stores configured language array
 		$this->set('storeslanguage',explode(',',$this->__config->get('storeslanguage')));
