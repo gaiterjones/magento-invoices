@@ -22,20 +22,31 @@ class MagentoOrdersHTML extends MagentoOrders
 
 	public function __construct($_variables) {
 			
-			parent::__construct($_variables);
-
-			$this->getOrderHTML();
-	}
-
-	public function getOrderHTML()
-	{
+		// load parent
+		parent::__construct($_variables);
 		
+		// define class variables
+		$_array=array(
+			"timezone"			 		=> $this->__config->get('timezone'),
+			"cachefolder"		 		=> $this->__config->get('cachefolder')
+		);
+		$this->loadClassVariables($_array);
+		
+		$this->getOrderHTML();
+
+	}
+	
+	// -- get order html
+	private function getOrderHTML()
+	{
 		$this->set('success',false);
 		$this->set('output',false);
 		$this->set('errormessage','Not defined');
 		
+		// -- generate the html
 		PageMainData::getOrdersHTML();
 		
+		// -- ajax return
 		$_output=$this->get('orderulhtml');
 		
 		if (!empty($_output)) {
@@ -43,8 +54,7 @@ class MagentoOrdersHTML extends MagentoOrders
 			$this->set('success',true);
 			$this->set('output',$_output);
 		}
-	
-	}
+	}	
 	
 }  
 ?>

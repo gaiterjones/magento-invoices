@@ -24,9 +24,10 @@ class PageMain extends Page {
 	
 		// load parent
 		parent::__construct($_variables);
-
+		
 		// define class variables
 		$_array=array(
+			"mobileplatform"			=> Mobile::isMobilePlatform(),
 			"ordertimerange"	 		=> $this->__config->get('ordertimerange'),
 			"timezone"			 		=> $this->__config->get('timezone'),
 			"cachefolder"		 		=> $this->__config->get('cachefolder')
@@ -35,10 +36,10 @@ class PageMain extends Page {
 		// load class variables
 		$this->loadClassVariables($_array);
 		
-		// load the orders
+		// load the order html
 		PageMainData::getOrdersHTML();
 		
-		// load html for page
+		// load the page html
 		PageMainHTML::html();
 		
 		// render page

@@ -57,6 +57,7 @@ class MagentoInvoice
 								'orderid' => $_orderID,
 								'storeid' => $_storeID
 								));
+		$_obj->getOrders();
 		$_success=$_obj->get('success');
 		
 		if($_success) {

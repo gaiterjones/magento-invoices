@@ -26,10 +26,7 @@ class Page {
 		public function __construct($_variables) {
 		
 			// load class variables
-			foreach ($_variables as $key => $value)
-			{
-				$this->set($key,$value);
-			}
+			$this->loadClassVariables($_variables);
 
 			// load app variables
 			$this->__config= new config();
@@ -157,38 +154,5 @@ class Page {
 
 		  return $text;
 		}		
-
-		public function getBrowser()
-		{
-
-			preg_match('/MSIE (.*?);/', $_SERVER['HTTP_USER_AGENT'], $matches);
-
-			if (count($matches)>1){
-			  //Then we're using IE
-			  $version = $matches[1];
-
-			  switch(true){
-				case ($version<=8):
-				  return('MSIE');
-				  break;
-
-				case ($version==9):
-				  //IE9!
-				  return('MSIE9');
-				  break;
-
-				default:
-				  return('MSIE10+');
-			  }
-			}
-
-			if (strpos($_SERVER["HTTP_USER_AGENT"], 'Firefox')) { return('Firefox'); }
-			if (strpos($_SERVER["HTTP_USER_AGENT"], 'Chrome')) { return('Chrome'); }
-			if (strpos($_SERVER["HTTP_USER_AGENT"], 'Safari')) { return('Safari'); }
-			
-			return ('Other');
-			
-		}
-
 }
 ?>

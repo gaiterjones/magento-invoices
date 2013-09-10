@@ -65,7 +65,7 @@ class PageMainData
 								<div class="ordericon">
 									<img class="infotip" width="64" alt="Order '. $_orderID. '" title="Order '. $_orderID. '" id="order-icon-'. $_orderID. '" src="images/order-icon.png"><span class="textBlah">'. $_orderID. '</span>
 								</div>
-								<div class="ordertext">'. ($_orderAcknowledged ? '<img class="infotip" title="'. $this->__t->__('Printed'). ' '. $_orderAckTime. '" alt="'. $this->__t->__('Printed'). ' '. $_orderAckTime. '" width="32" src="images/printed-icon.png"><em> ' : ''). '<span class="capitalize">'. $order->getBillingAddress()->getName(). '</span> - '. $order->getCustomer_email(). ' - '. $_orderStatus. ' - '. $_orderCreatedAt. ($_orderAcknowledged ? '</em>  ' : '  '). ($_today ? '<img title="'. $this->__t->__('Today'). '" alt="'. $this->__t->__('Today'). '" class="today-icon" width="32" src="images/today-icon.png">' : ''). '
+								<div class="ordertext">'. ($_orderAcknowledged ? '<img class="infotip" title="'. $this->__t->__('Printed'). ' '. $_orderAckTime. '" alt="'. $this->__t->__('Printed'). ' '. $_orderAckTime. '" width="32" src="images/printed-icon.png"><em> ' : ''). '<span class="capitalize">'. $order->getBillingAddress()->getName(). '</span> - '. $order->getCustomer_email(). ' - '. $_orderStatus. ' - '. $_orderCreatedAt. ($_orderAcknowledged ? '</em>  ' : '  '). ($_today ? '<img class="infotip" title="'. $this->__t->__('Today'). '" alt="'. $this->__t->__('Today'). '" class="today-icon" width="32" src="images/today-icon.png">' : ''). '
 								</div>
 							</div>
 						</a>

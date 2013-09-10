@@ -29,10 +29,11 @@ $_HTML[] = array
 <title>'. $this->__t->__('Magento Orders'). '</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/style.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="js/poshytip/src/tip-twitter/tip-twitter.css" />
-<link rel="stylesheet" type="text/css" href="js/fancybox/jquery.fancybox.css?v=2.0.6" media="screen" />
+<link rel="stylesheet" type="text/css" href="js/fancybox/jquery.fancybox.css?v=2.0.6" media="screen" />'.
+ (!$this->get('mobileplatform') ? '
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-<script src="js/poshytip/src/jquery.poshytip.js"></script>
+<script src="js/poshytip/src/jquery.poshytip.js"></script>' : ''). '
+<link rel="stylesheet" type="text/css" href="js/poshytip/src/tip-twitter/tip-twitter.css" />
 <script src="js/jquery.editinplace.js"></script>
 <script src="lib/js/script.js"></script>
 <script src="js/fancybox/jquery.fancybox.js?v=2.0.6"></script>

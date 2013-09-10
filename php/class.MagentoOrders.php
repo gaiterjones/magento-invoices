@@ -36,7 +36,6 @@ class MagentoOrders
 			
 			$this->loadClassVariables($_variables);			
 			
-			$this->getOrders();
 	}
 
 	
@@ -96,7 +95,7 @@ class MagentoOrders
 	}	
 	
 	// -- get app config
-	private function loadConfig()
+	protected function loadConfig()
 	{
 		$this->__config= new config();
 	}
@@ -112,7 +111,7 @@ class MagentoOrders
 	}
 	
 	
-	private function loadClassVariables($_variables)
+	protected function loadClassVariables($_variables)
 	{
 		foreach ($_variables as $_variableName=>$_variableData)
 		{
