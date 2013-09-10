@@ -77,6 +77,12 @@ $(document).ready(function() {
 	  return false;
 	});	
 	
+	$("#orderlist").on("dblclick", ".ordercontainer", function() {
+		var checkbox = $(this).parent().parent().find("input:checkbox[name=form_1_order_ul_select_order]");
+		openFB(checkbox.val());
+		return false;
+	});	
+
 	// -- select all
 	//
 	$("#orderlist").on("click", "#form_1_order_ul_select_allorders", function() {
@@ -175,7 +181,8 @@ $_HTML[] = array
 									<span style="display:inline-block; vertical-align: top; margin-top:10px;" id="vatrate" class="infotip" title="'. $this->__t->__('Include VAT'). '">'. $this->__t->__('VAT'). ': % '. $this->__config->get('vatrate'). '</span>
 									<input type="checkbox" id="form_1_addvat" name="form_1_addvat" '. ($this->__config->get('addvat') ? 'checked' : ''). '>
 									
-								</div>									
+								</div>
+								<div style="padding: 10px 0px 0px 0px;" id="date_time"></div>								
 								<div id="orderlist">'.
 									$this->get('orderulhtml'). '
 								</div>							

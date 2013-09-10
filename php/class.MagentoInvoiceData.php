@@ -86,7 +86,7 @@ class MagentoInvoiceData
 	  <div id="footer">
 		<p>
 			<!-- Use for screen media footer text  -->
-			<strong>'. $this->__t->__($_footerText). '</strong>
+			<strong>'. $this->__t->__($_footerText,$this->get('orderlanguage')). '</strong>
 		</p>
 	  </div>' : '').
 	  '<div id="printFooter">
@@ -146,10 +146,10 @@ class MagentoInvoiceData
 		  <table width="100%" border="0" cellspacing="0" cellpadding="2">
 			<tr>
 			  <td valign="top"><p><strong>'. $this->__t->__('Invoice Address',$this->get('orderlanguage')). ':</strong></p>
-				'. $_billingAddress. '
+				<span class="captitalize">'. $_billingAddress. '</span>
 				<p><a href="mailto:' . $_customerEmail . '"><u>' . $_customerEmail . '</u></a></p></td>
 			  <td valign="top"><p><strong>'. $this->__t->__('Delivery Address',$this->get('orderlanguage')). ':</strong></p>
-				'. $_shippingAddress. '
+				<span class=capitalize">'. $_shippingAddress. '</span>
 			  </td>
 			  <td valign="top"><p>'. $_invoiceIdText . '  '. $this->__t->__('Number',$this->get('orderlanguage')). ': <strong>'. $_invoiceId. '</strong></p>
 				<p>

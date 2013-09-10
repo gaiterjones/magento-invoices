@@ -5,7 +5,7 @@ Invoice Address=Rechnungsinformationen
 Delivery Address=Versandinformationen
 Date=Datum
 Payment Method=Zahlungsart
-Delivery PerLieferung per
+Delivery Per=Lieferung per
 Quantity=Menge
 Item=Art.-Nr
 Description=Artikel
@@ -27,3 +27,4 @@ view invoice=rechnung zeigen
 print invoice=rechnung drucken
 Order=Bestellung
 Number=nummer
+Today=Heute
