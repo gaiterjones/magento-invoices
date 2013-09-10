@@ -4,6 +4,8 @@
 ### Synopsis
 This PHP application allows you to manage print and view Magento invoices with one click.
 
+Live demo at [http://blog.gaiterjones.com/dropdev/magento/orders/](http://blog.gaiterjones.com/dropdev/magento/orders/)
+
 ### Version
 ***
 	@version		10092013
