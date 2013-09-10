@@ -28,13 +28,17 @@ You may install the application in your Magento folder but you should secure the
 
 Configure the application files in the config folder, you must configure the full path to the configuration .ini file, and the path to your Magento installation.
 
-Load application URL into your browser, the application will load and you should see your current Magento orders.
+Edit the .ini file and configure your settings for stores and language etc.
+
+The invoice can be displayed/printed in the language of the store. Edit or create the translation files in the php/locale folder for your languages.
+
+Enter the application installation URL into your browser, the application will load and you should see your current Magento orders.
 
 ### Usage
 
 You can change the time range for the orders, the default is set in the config files, but you can also click the time range to edit it.
 
-Click orders to select them, or double click one order to view it.
+Click orders to select them, or double click one order to view it. Orders will be displayed by default in English, create translation files to display them in other languages.
 
 Selected orders can be viewed or printed by clicking the Preview or Print buttons. Click the refresh button to reload the order view.
 
