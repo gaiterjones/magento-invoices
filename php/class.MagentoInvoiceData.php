@@ -75,12 +75,13 @@ class MagentoInvoiceData
 	function invoiceFooter()
 	{
 	  
-	  $_showComments=$this->get('showcomments');;
+	  $_showComments=$this->get('showcomments');
+	  $_customerOrderComments=$this->get('customerordercomments');
 	  $_footerText=$this->get('footertext');
 	  
-	  $_html=($_showComments ? '
-	  <div id="notes"> <strong>Notes:</strong><br />
-		<textarea id="comments_area">['. $this->__t->__('Type your comments here.',$this->get('orderlanguage')). ']</textarea>
+	  $_html=($_showComments || $_customerOrderComments ? '
+	  <div id="notes"> <strong>'. $this->__t->__('Notes',$this->get('orderlanguage')). ':</strong><br />
+		<textarea id="comments_area">'. ($_customerOrderComments ? $_customerOrderComments : $this->__t->__('Type your comments here.',$this->get('orderlanguage'))). '</textarea>
 	  </div>' : '').
 		(!empty($_footerText) ? '
 	  <div id="footer">
@@ -138,6 +139,8 @@ class MagentoInvoiceData
 			$_shippingAddress=$_order->getShippingAddress()->format('html');
 			$_paymentMethod=$_order->getPayment()->getMethodInstance()->getTitle();
 			$_shippingDescription=$_order->getShippingDescription();
+			
+			$_customerOrderComments=$_order->getvweCustomerordercomment();
 		}
 		
 		if ($_count < 1) { throw new exception ('No Order Data Found!'); }
@@ -165,6 +168,10 @@ class MagentoInvoiceData
 			</tr>
 		  </table>';
 		  
+		  // save comments for later
+		  $this->set('customerordercomments',$_customerOrderComments);
+		  
+		  // -- return html
 		  return ($_html);
 	
 	}

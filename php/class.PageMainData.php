@@ -34,8 +34,6 @@ class PageMainData
 		
 		unset($_obj);
 		
-		date_default_timezone_set($this->get('timezone'));
-		
 		// -- iterate magento product collection
 		foreach ($_collection as $order) {
 		
@@ -50,6 +48,11 @@ class PageMainData
 				$_today=true;
 				$_todayCount++;
 			}
+
+			// add timezone to date and reformat to dd-mm-yyyy
+			$_orderCreatedAt=strtotime($_orderCreatedAt);
+			date_default_timezone_set($this->get('timezone'));
+			$_orderCreatedAt = date('d-m-Y H:i:s',$_orderCreatedAt);			
 			
 			$_orderAcknowledged=false;
 			if (file_exists($this->get('cachefolder').md5($_orderID). 'MageInvoice')) {
@@ -65,7 +68,7 @@ class PageMainData
 								<div class="ordericon">
 									<img class="infotip" width="64" alt="Order '. $_orderID. '" title="Order '. $_orderID. '" id="order-icon-'. $_orderID. '" src="images/order-icon.png"><span class="textBlah">'. $_orderID. '</span>
 								</div>
-								<div class="ordertext">'. ($_orderAcknowledged ? '<img class="infotip" title="'. $this->__t->__('Printed'). ' '. $_orderAckTime. '" alt="'. $this->__t->__('Printed'). ' '. $_orderAckTime. '" width="32" src="images/printed-icon.png"><em> ' : ''). '<span class="capitalize">'. $order->getBillingAddress()->getName(). '</span> - '. $order->getCustomer_email(). ' - '. $_orderStatus. ' - '. $_orderCreatedAt. ($_orderAcknowledged ? '</em>  ' : '  '). ($_today ? '<img class="infotip" title="'. $this->__t->__('Today'). '" alt="'. $this->__t->__('Today'). '" class="today-icon" width="32" src="images/today-icon.png">' : ''). '
+								<div class="ordertext">'. ($_orderAcknowledged ? '<img class="infotip" title="'. $this->__t->__('Printed'). ' '. $_orderAckTime. '" alt="'. $this->__t->__('Printed'). ' '. $_orderAckTime. '" width="32" src="images/printed-icon.png"><em> ' : ''). '<span class="capitalize">'. $order->getBillingAddress()->getName(). '</span> - '. $order->getCustomer_email(). ' - '. $_orderStatus. ' - <span class="infotip" title="TZ '. $this->get('timezone'). '">'. $_orderCreatedAt. '</span>'. ($_orderAcknowledged ? '</em>  ' : '  '). ($_today ? '<img class="infotip" title="'. $this->__t->__('Today'). '" alt="'. $this->__t->__('Today'). '" class="today-icon" width="32" src="images/today-icon.png">' : ''). '
 								</div>
 							</div>
 						</a>

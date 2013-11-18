@@ -27,7 +27,7 @@ class PageMain extends Page {
 		
 		// define class variables
 		$_array=array(
-			"mobileplatform"			=> Mobile::isMobilePlatform(),
+			"mobileplatform"			=> Mobile::isMobilePlatform(), // turn off infotip on mobiles cos it sux
 			"ordertimerange"	 		=> $this->__config->get('ordertimerange'),
 			"timezone"			 		=> $this->__config->get('timezone'),
 			"cachefolder"		 		=> $this->__config->get('cachefolder')
