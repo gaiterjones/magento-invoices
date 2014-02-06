@@ -38,9 +38,12 @@ class PageMainData
 		foreach ($_collection as $order) {
 		
 			$_today=false;
+			$_orderAlert=false;
 			$_count++;
 			$_orderID= $order->getIncrementId();
+			
 			$_orderStatus=$order->getStatus();
+			if ($_orderStatus != 'complete') { $_orderAlert=true; }
 			
 			$_orderCreatedAt=$order->getCreatedAt();
 			$_orderCreatedAtArray=explode(' ', $_orderCreatedAt);
@@ -48,6 +51,8 @@ class PageMainData
 				$_today=true;
 				$_todayCount++;
 			}
+			
+			
 
 			// add timezone to date and reformat to dd-mm-yyyy
 			$_orderCreatedAt=strtotime($_orderCreatedAt);
@@ -68,8 +73,9 @@ class PageMainData
 								<div class="ordericon">
 									<img class="infotip" width="64" alt="Order '. $_orderID. '" title="Order '. $_orderID. '" id="order-icon-'. $_orderID. '" src="images/order-icon.png"><span class="textBlah">'. $_orderID. '</span>
 								</div>
-								<div class="ordertext">'. ($_orderAcknowledged ? '<img class="infotip" title="'. $this->__t->__('Printed'). ' '. $_orderAckTime. '" alt="'. $this->__t->__('Printed'). ' '. $_orderAckTime. '" width="32" src="images/printed-icon.png"><em> ' : ''). '<span class="capitalize">'. $order->getBillingAddress()->getName(). '</span> - '. $order->getCustomer_email(). ' - '. $_orderStatus. ' - <span class="infotip" title="TZ '. $this->get('timezone'). '">'. $_orderCreatedAt. '</span>'. ($_orderAcknowledged ? '</em>  ' : '  '). ($_today ? '<img class="infotip" title="'. $this->__t->__('Today'). '" alt="'. $this->__t->__('Today'). '" class="today-icon" width="32" src="images/today-icon.png">' : ''). '
-								</div>
+								<div class="ordertext"><img width="32" title="'. $this->__t->__('Customer info'). '" class="customerinfo clickable infotip" src="images/customerdata-icon.png" data-id="'. $order->getCustomer_email(). '"> '. ($_orderAcknowledged ? '<img class="infotip printed" title="'. $this->__t->__('Printed'). ' '. $_orderAckTime. '" alt="'. $this->__t->__('Printed'). ' '. $_orderAckTime. '" width="32" src="images/printed-icon.png"><em> ' : ''). '<span class="capitalize">'. $order->getBillingAddress()->getName(). '</span> - <span class="customeremail">'. $order->getCustomer_email(). '</span> - '. $_orderStatus. ' - <span class="infotip" title="TZ '. $this->get('timezone'). '">'. $_orderCreatedAt. '</span>'. ($_orderAcknowledged ? '</em>  ' : '  '). ($_today ? '<img class="infotip" title="'. $this->__t->__('Today'). '" alt="'. $this->__t->__('Today'). '" class="today-icon" width="32" src="images/today-icon.png">' : ''). ' '.
+								($_orderAlert ? '<img class="infotip" title="'. $this->__t->__('Order not complete'). '" alt="'. $this->__t->__('Order not complete'). '" width="32" src="images/warning-icon2.png">' : '').
+								'</div>
 							</div>
 						</a>
 			</li>';

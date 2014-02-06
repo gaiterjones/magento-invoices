@@ -284,6 +284,48 @@ class MagentoCollection extends Magento {
 	     
 	    $this->set('collection',$collection); 
 	}
+	
+	 public function getCustomersByDate($_days="31")
+	{
+	
+		$_timeRange = date('Y-m-d', strtotime("-". $_days. " day"));
+		
+		$_customers = Mage::getModel('customer/customer')->getCollection()
+			->addAttributeToFilter('created_at', array('from'  => $_timeRange))
+			//->addAttributeToFilter('status', array('neq' => Mage_Sales_Model_Order::STATE_COMPLETE))
+			->addAttributeToSelect('*') 
+			->addAttributeToSort('created_at', 'DESC');
+			;
+		
+		$this->set('collection',$_customers); 
+	
+	}
+
+	public function getCustomerByEmailAddress($_emailAdress,$_storeID=0)
+	{
+	
+		$_customer = Mage::getModel("customer/customer");
+		$_customer->setWebsiteId(Mage::app()->getWebsite()->getId());
+		$_customer->loadByEmail($_emailAdress); //load customer by email id
+		
+		if ($_customer->getId()) { // verify customer
+		
+			$_customer = Mage::getModel('customer/customer')->load($_customer->getId()); 
+			$_shippingaddress = Mage::getModel('customer/address')->load($_customer->default_shipping); // get default shipping address for customer
+			$_addressdata = $_shippingaddress ->getData();
+		
+		} else {
+		
+			$_customer=false;
+			$_addressdata=false;
+			
+		}
+		
+		$this->set('collection',$_customer);
+		$this->set('addressdata',$_addressdata);
+		
+	
+	}		
 
 	 public function getOrdersByDate($_days=31)
 	{
@@ -316,5 +358,21 @@ class MagentoCollection extends Magento {
 		$this->set('collection',$_orders); 
 	
 	}
+	
+	public function getCustomerCountry($_id)
+	{
+	
+		$_country = Mage::getModel('directory/country')->loadByCode($_id);
+
+		return ($_country->getName());
+	}
+
+	public function getCustomerRegion($_id)
+	{
+	
+		$_region = Mage::getModel('directory/region')->loadByCode($_id);
+
+		return ($_region->getName());
+	}		
 }
 ?>

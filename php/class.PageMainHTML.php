@@ -43,6 +43,7 @@ $_HTML[] = array
 
 $(document).ready(function() {
 
+'. (!$this->get('mobileplatform') ? '
 	// -- init infotip
 	//
 	$(".infotip").poshytip({
@@ -56,7 +57,7 @@ $(document).ready(function() {
 		timeOnScreen: 3000,
 		liveEvents: true,
 		slide: false
-	});
+	});' : ''). '
 
 	// -- add vat check box
 	//
@@ -145,6 +146,7 @@ $(document).ready(function() {
 	// -- fancybox iframe
 	//
 	function openFB(orderid) {
+	 $.fancybox.showLoading();
 	 $.fancybox({
 	 "href" : "invoice/index.phtml?orderid=" + orderid + (addvat ? "&addvat=" + addvat : ""),
 	 "type" : "iframe",
@@ -172,7 +174,7 @@ $_HTML[] = array
     'html' => '
 			<!-- START CONTENT -->
             <div id="content">
-				<div id="form">
+				<div id="form" class="form">
 						<fieldset>
 							<legend>'. $this->__t->__('Magento Orders'). '</legend>
 								<div id="buttons">
